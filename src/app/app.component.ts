@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PostService } from './services/post.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,11 +8,18 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'proyect-angular';
 
-  products: any[] = [];
+  buffers: any[] = [];
 
-  constructor() {}
+  constructor(private postsService:PostService) {}
 
   ngOnInit() {
-    console.log('NgOnInit');
+    this.loadBufferedPosts(5);
+  }
+
+  loadBufferedPosts(size: number) {
+    this.postsService.getBufferedPosts(size).subscribe({
+      next: (data) => this.buffers = data,
+      error: (error) => console.error(error)
+    })
   }
 }

@@ -1,3 +1,12 @@
 <div class="container mt-5">
-  <h2>Lista de Posts</h2>
+  <h2>Buffered Posts</h2>
+
+  <div *ngFor="let buffer of buffers; let i = index" class="mb-3">
+    <h3>Buffer {{ i +  1}} </h3>
+    <ul>
+      <li *ngFor="let post of buffer" class="list-group-item">
+        {{ post.title }} - {{ post.content }}
+      </li>
+    </ul>
+  </div>
 </div>
